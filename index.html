@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trang chủ | Vạn Thư Các</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html">VẠN THƯ CÁC</a>
+
+      <nav class="nav">
+        <a href="#">Mới cập nhật</a>
+        <a href="#">Thể loại</a>
+        <a href="#">Top</a>
+      </nav>
+
+      <form class="search" id="searchForm">
+        <input id="searchInput" type="search" placeholder="Tìm truyện..." autocomplete="off" />
+        <button type="submit">Tìm</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="container">
+    <section class="section">
+      <div class="section__head">
+        <h2>Mới cập nhật</h2>
+        <div class="muted" id="resultCount"></div>
+      </div>
+
+      <div class="grid" id="comicGrid">
+        <!-- cards render bằng JS -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span class="muted">© 2025 VẠN THƯ CÁC</span>
+    </div>
+  </footer>
+
+<script type="module" src="assets/js/app.js"></script>
+</body>
+</html>

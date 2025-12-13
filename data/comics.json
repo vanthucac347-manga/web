@@ -1,0 +1,44 @@
+{
+  "site": { "name": "Web Truyện Của Tôi" },
+  "comics": [
+    {
+      "slug": "truyen-1",
+      "title": "Truyện 1",
+      "cover": "https://picsum.photos/300/420?random=113",
+      "updatedAt": "2025-12-12",
+      "views": 123456,
+      "genres": ["Manhwa", "Romance"],
+      "description": "Mô tả ngắn (sau này có thể dài hơn).",
+      "chapters": [
+        { "id": "c12", "name": "Chương 12", "updatedAt": "2025-12-12",
+          "pages": 
+          [
+          "https://picsum.photos/900/1400?random=111",
+          "https://picsum.photos/900/1400?random=112",
+          "https://picsum.photos/900/1400?random=113"
+          ]
+        },
+        { "id": "c11", "name": "Chương 11", "updatedAt": "2025-12-10", 
+          "pages":
+          [
+          "https://picsum.photos/900/1400?random=114",
+          "https://picsum.photos/900/1400?random=115",
+          "https://picsum.photos/900/1400?random=116"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "truyen-2",
+      "title": "Truyện 2",
+      "cover": "https://picsum.photos/300/420?random=114",
+      "updatedAt": "2025-12-10",
+      "views": 54321,
+      "genres": ["Action", "Fantasy"],
+      "chapters": [
+        { "id": "c12", "name": "Chương 12", "updatedAt": "2025-12-12" },
+        { "id": "c11", "name": "Chương 11", "updatedAt": "2025-12-10" }
+      ]
+    }
+  ]
+}

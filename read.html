@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Đọc truyện | VẠN THƯ CÁC</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html">VẠN THƯ CÁC</a>
+
+      <nav class="nav">
+        <a href="index.html">Mới cập nhật</a>
+        <a href="#">Thể loại</a>
+        <a href="#">Top</a>
+      </nav>
+
+      <div class="muted" id="hintKeys" style="margin-left:auto;">
+        Phím tắt: ← / → đổi chương
+      </div>
+    </div>
+  </header>
+
+<button id="btnTop" class="btn" style="position:fixed; right:14px; bottom:14px;">
+  ↑ Lên đầu
+</button>
+
+
+
+  <main class="container">
+    <section class="section">
+      <div class="reader-top">
+        <div>
+          <a class="muted" id="backToComic" href="index.html">← Quay lại</a>
+          <h1 class="reader-title" id="readerTitle">Đang tải...</h1>
+          <div class="muted" id="readerMeta"></div>
+        </div>
+
+        <div class="reader-controls">
+          <button class="btn" id="btnPrev">⬅ Chap trước</button>
+
+          <select class="select" id="chapterSelect" aria-label="Chọn chương">
+            <option>Đang tải...</option>
+          </select>
+
+          <button class="btn" id="btnNext">Chap sau ➡</button>
+        </div>
+      </div>
+
+      <div id="pageList" class="pages">
+        <!-- render ảnh -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span class="muted">© 2025 VẠN THƯ CÁC</span>
+    </div>
+  </footer>
+
+<script type="module" src="assets/js/read.js"></script>
+</body>
+</html>

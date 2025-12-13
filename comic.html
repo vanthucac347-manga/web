@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Truyện | VẠN THƯ CÁC</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <!-- Header (giữ giống trang chủ) -->
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html">VẠN THƯ CÁC</a>
+
+      <nav class="nav">
+        <a href="index.html">Mới cập nhật</a>
+        <a href="#">Thể loại</a>
+        <a href="#">Top</a>
+      </nav>
+
+      <form class="search" action="index.html">
+        <input type="search" placeholder="Tìm truyện..." />
+        <button type="submit">Tìm</button>
+      </form>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <a class="muted" href="index.html">← Quay lại</a>
+
+      <div id="comicDetail" class="detail">
+        <!-- render bằng JS -->
+      </div>
+
+      <div class="section__head" style="margin-top:18px;">
+        <h2>Danh sách chương</h2>
+        <div class="muted" id="chapterCount"></div>
+      </div>
+
+      <div id="chapterList" class="chapters">
+        <!-- render bằng JS -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span class="muted">© 2025 VẠN THƯ CÁC</span>
+    </div>
+  </footer>
+
+<script type="module" src="assets/js/comic.js?v=1"></script>
+</body>
+</html>
