@@ -3,12 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chi tiết truyện | Vạn Thư Các</title>
+  <title>Quản trị | Vạn Thư Các</title>
   <link rel="icon" href="assets/img/logo001.png" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-  <!-- Header (giữ giống trang chủ) -->
   <header class="header">
     <div class="container header__inner">
       <a class="brand" href="index.html" aria-label="Vạn Thư Các">
@@ -18,33 +17,21 @@
         <a href="index.html">Mới cập nhật</a>
         <a href="#">Thể loại</a>
         <a href="#">Top</a>
+        <a href="admin.html" class="nav__active">Quản trị</a>
       </nav>
 
-      <form class="search" action="index.html">
-        <input type="search" placeholder="Tìm truyện..." />
-        <button type="submit">Tìm</button>
-      </form>
-      
       <div class="auth" id="authBox"></div>
     </div>
   </header>
 
   <main class="container">
     <section class="section">
-      <a class="muted" href="index.html">← Quay lại</a>
-
-      <div id="comicDetail" class="detail">
-        <!-- render bằng JS -->
+      <div class="section__head">
+        <h1>Khu vực quản trị</h1>
+        <div class="muted">Chỉ tài khoản admin mới được phép upload và chỉnh sửa</div>
       </div>
 
-      <div class="section__head" style="margin-top:18px;">
-        <h2>Danh sách chương</h2>
-        <div class="muted" id="chapterCount"></div>
-      </div>
-
-      <div id="chapterList" class="chapters">
-        <!-- render bằng JS -->
-      </div>
+      <div id="adminContent"></div>
     </section>
   </main>
 
@@ -53,8 +40,6 @@
       <span class="muted">© 2025 VẠN THƯ CÁC</span>
     </div>
   </footer>
-  
-<script type="module" src="assets/js/auth-ui.js"></script>
-<script type="module" src="assets/js/comic.js?v=1"></script>
+  <script type="module" src="assets/js/admin.js"></script>
 </body>
 </html>

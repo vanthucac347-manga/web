@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Trang chủ | Vạn Thư Các</title>
+  <title>Kho Truyện | Vạn Thư Các</title>
+  <link rel="icon" href="assets/img/logo001.png" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
@@ -13,18 +14,21 @@
   <!-- Header -->
   <header class="header">
     <div class="container header__inner">
-      <a class="brand" href="index.html">VẠN THƯ CÁC</a>
-
+      <a class="brand" href="index.html" aria-label="Vạn Thư Các">
+        <img class="brand__logo" src="assets/img/logo003.png" alt="Vạn Thư Các" />
+      </a>
       <nav class="nav">
         <a href="#">Mới cập nhật</a>
         <a href="#">Thể loại</a>
         <a href="#">Top</a>
+        <a href="admin.html">Quản trị</a>
       </nav>
 
       <form class="search" id="searchForm">
         <input id="searchInput" type="search" placeholder="Tìm truyện..." autocomplete="off" />
         <button type="submit">Tìm</button>
       </form>
+      <div class="auth" id="authBox"></div>
     </div>
   </header>
 
@@ -49,6 +53,7 @@
     </div>
   </footer>
 
+<script type="module" src="assets/js/auth-ui.js"></script>
 <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>
