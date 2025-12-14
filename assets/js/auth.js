@@ -1,9 +1,30 @@
-const USERS = [
-  { username: "adminvanthucac", password: "k1mkvanthucac283..", role: "admin" },
-  { username: "viewer", password: "viewer123", role: "viewer" }
+const DEFAULT_USERS = [
+  { username: "adminvanthucac", password: "k1mkvanthucac283..", role: "admin", displayName: "Admin" },
 ];
 
 const STORAGE_KEY = "vtc_current_user";
+const STORAGE_USER_LIST = "vtc_custom_users";
+
+function loadCustomUsers() {
+  const raw = localStorage.getItem(STORAGE_USER_LIST);
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.map(u => ({ ...u, role: u.role || "viewer" }));
+  } catch (e) {
+    console.warn("Không parse được danh sách user", e);
+    return [];
+  }
+}
+
+function saveCustomUsers(list) {
+  localStorage.setItem(STORAGE_USER_LIST, JSON.stringify(list));
+}
+
+function getAllUsers() {
+  return [...DEFAULT_USERS, ...loadCustomUsers()];
+}
 
 function persistUser(user) {
   if (!user) {
@@ -12,7 +33,8 @@ function persistUser(user) {
   }
   localStorage.setItem(STORAGE_KEY, JSON.stringify({
     username: user.username,
-    role: user.role
+    role: user.role,
+    displayName: user.displayName
   }));
 }
 
@@ -32,14 +54,34 @@ export function isAdmin(user = getCurrentUser()) {
 }
 
 export function login(username, password) {
-  const user = USERS.find(u => u.username === username && u.password === password);
-  if (!user) {
+  const cleanUser = (username || "").trim();
+  const cleanPass = (password || "").trim();
+  const user = getAllUsers().find(u => u.username === cleanUser && u.password === cleanPass);  if (!user) {
     return { ok: false, message: "Sai tài khoản hoặc mật khẩu" };
   }
-  persistUser(user);
+  const normalized = { username: user.username, role: user.role, displayName: user.displayName || user.username };
+  persistUser(normalized);  
   notifyAuthChange();
-  return { ok: true, user: { username: user.username, role: user.role } };
+  return { ok: true, user: normalized };
 }
+
+export function registerUser({ username, password, displayName }) {
+  const cleanUser = (username || "").trim();
+  const cleanPass = (password || "").trim();
+  const cleanName = (displayName || "").trim();
+
+  if (!cleanUser || !cleanPass || !cleanName) {
+    return { ok: false, message: "Vui lòng nhập đầy đủ thông tin" };
+  }
+
+  if (getAllUsers().some(u => u.username.toLowerCase() === cleanUser.toLowerCase())) {
+    return { ok: false, message: "Tài khoản đã tồn tại" };
+  }
+
+  const customUsers = loadCustomUsers();
+  customUsers.push({ username: cleanUser, password: cleanPass, displayName: cleanName, role: "viewer" });
+  saveCustomUsers(customUsers);
+  return { ok: true, message: "Đăng ký thành công" };}
 
 export function logout() {
   persistUser(null);
@@ -56,53 +98,4 @@ export function requireAdmin() {
 
 function notifyAuthChange() {
   document.dispatchEvent(new CustomEvent("auth:change", { detail: getCurrentUser() }));
-}
-
-export function renderAuthWidget(container) {
-  if (!container) return;
-
-  function render() {
-    const user = getCurrentUser();
-    if (!user) {
-      container.innerHTML = `
-        <form class="auth__form" id="authForm">
-          <input aria-label="Tài khoản" name="username" placeholder="Tài khoản" required />
-          <input aria-label="Mật khẩu" name="password" type="password" placeholder="Mật khẩu" required />
-          <button type="submit" class="btn">Đăng nhập</button>
-        </form>
-        <div class="muted auth__hint">Demo: admin/admin123</div>
-      `;
-
-      const form = container.querySelector("#authForm");
-      form?.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const fd = new FormData(form);
-        const result = login(fd.get("username"), fd.get("password"));
-        if (!result.ok) {
-          container.querySelector(".auth__hint").textContent = result.message;
-        } else {
-          render();
-        }
-      });
-      return;
-    }
-
-    container.innerHTML = `
-      <div class="auth__user">
-        <div class="auth__pill">
-          <span class="auth__name">${user.username}</span>
-          <span class="auth__role">${user.role}</span>
-        </div>
-        <button class="btn" id="btnLogout">Đăng xuất</button>
-      </div>
-    `;
-
-    container.querySelector("#btnLogout")?.addEventListener("click", () => {
-      logout();
-      render();
-    });
-  }
-
-  render();
-  document.addEventListener("auth:change", render);
 }

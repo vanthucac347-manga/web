@@ -25,7 +25,43 @@ export async function loadComics() {
   console.log("✅ loadComics() fetching comics.json...");
   const res = await fetch("data/comics.json", { cache: "no-store" });
   if (!res.ok) throw new Error("Không tải được data/comics.json (HTTP " + res.status + ")");
-  return res.json();
+const base = await res.json();
+  const custom = getCustomComics();
+
+  const bySlug = new Map();
+  (base.comics ?? []).forEach((c) => {
+    if (!c?.slug) return;
+    bySlug.set(c.slug, c);
+  });
+  (custom ?? []).forEach((c) => {
+    if (!c?.slug) return;
+    bySlug.set(c.slug, c);
+  });
+
+  return { ...base, comics: Array.from(bySlug.values()) };
+}
+
+export function getCustomComics() {
+  try {
+    const raw = localStorage.getItem("customComics");
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    console.warn("Không đọc được customComics trong localStorage", e);
+    return [];
+  }
+}
+
+export function persistCustomComics(list) {
+  try {
+    const bySlug = new Map();
+    (list ?? []).forEach((c) => {
+      if (!c?.slug) return;
+      bySlug.set(c.slug, c);
+    });
+    localStorage.setItem("customComics", JSON.stringify(Array.from(bySlug.values())));
+  } catch (e) {
+    console.warn("Không lưu được customComics", e);
+  }
 }
 
 export function latestChapterName(comic) {
